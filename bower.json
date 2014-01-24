@@ -1,0 +1,24 @@
+{
+	"name": "jymin",
+	"version": "0.0.1",
+	"ignore": [
+		"**/.*",
+		"test",
+		"*.md",
+		"AUTHORS.txt",
+		"package.json",
+		"bower.json"
+	],
+	"dependencies": {
+	},
+	"devDependencies": {
+		"grunt": "0.4.2",
+		"uglify-js": "1.3.5"
+	},
+	"keywords": [
+		"jymin",
+		"javascript",
+		"library",
+		"minify"
+	]
+}

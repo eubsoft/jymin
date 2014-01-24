@@ -1,0 +1,35 @@
+{
+	"name": "jymin",
+	"title": "Jymin",
+	"description": "JavaScript library for DOM operations",
+	"version": "0.0.1",
+	"main": "dist/jymin.js",
+	"homepage": "http://jymin.com",
+	"author": {
+		"name": "Jymin Contributors",
+		"url": "https://github.com/eubsoft/jymin/blob/master/AUTHORS.txt"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eubsoft/jymin.git"
+	},
+	"keywords": [
+		"jymin",
+		"javascript",
+		"library",
+		"minify"
+	],
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/eubsoft/jymin/blob/master/MIT-LICENSE.txt"
+		}
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"grunt": "0.4.2",
+		"uglify-js": "1.3.5"
+	},
+	"readmeFilename": "README.md",
+	"homepage": "http://jymin.com"
+}
