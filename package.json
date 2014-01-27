@@ -1,7 +1,7 @@
 {
 	"name": "jymin",
 	"title": "Jymin",
-	"description": "JavaScript library for DOM operations",
+	"description": "Tiny JavaScript for a Big World",
 	"version": "0.0.1",
 	"main": "dist/jymin.js",
 	"homepage": "http://jymin.com",

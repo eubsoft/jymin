@@ -1,23 +1,23 @@
 /**
  * Get the current location host.
  */
-var getHost = function() {
+var getHost = function () {
 	return location.host;
 };
 
 /**
  * Get the base of the current URL.
  */
-var getBaseUrl = function() {
+var getBaseUrl = function () {
 	return location.protocol + '//' + getHost();
 };
 
 /**
  * Get the query parameters from a URL.
  */
-var getQueryParams = function(url) {
+var getQueryParams = function (url) {
 	url = url || location.href;
-	var query = url.substr(url.indexOf('?') + 1);
+	var query = url.substr(url.indexOf('?') + 1).split('#')[0];
 	var pairs = query.split('&');
 	query = {};
 	forEach(pairs, function (pair) {
@@ -29,3 +29,10 @@ var getQueryParams = function(url) {
 	return query;
 };
 
+/**
+ * Get the query parameters from the hash of a URL.
+ */
+var getHashParams = function (hash) {
+	hash = (hash || location.hash).replace(/^#/, '');
+	return hash ? getQueryParams(hash) : {};
+};
