@@ -2,7 +2,7 @@
 	"name": "jymin",
 	"title": "Jymin",
 	"description": "Tiny JavaScript for a Big World",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "dist/jymin.js",
 	"homepage": "http://jymin.com",
 	"author": {
