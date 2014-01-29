@@ -1,8 +1,11 @@
+var SOCKET_IO_PATH = '/socket.io/1/';
+var SOCKET_EMIT_RETRY_COUNT = 5;
+var SOCKET_EMIT_RETRY_TIMEOUT = 500;
+
 // Initially, the socket is just a holder for handlers.
 var socket = {H: {}};
 
-var SOCKET_IO_PATH = '/socket.io/1/';
-var socketEmissionId = 0;
+var socketEmissionId = 1;
 
 /**
  * Make a new socket connection.
@@ -59,17 +62,6 @@ var socketSetup = function (setupString) {
 };
 
 /**
- * Trigger handlers for a named event.
- */
-var socketTrigger = function (name, data) {
-	var handlers = socket.H;
-	var callbacks = handlers[name] = handlers[name] || [];
-	forEach(callbacks, function (callback) {
-		callback(data);
-	});
-};
-
-/**
  * Set a new handler for a named event.
  */
 var socketOn = function (name, callback) {
@@ -78,9 +70,77 @@ var socketOn = function (name, callback) {
 	callbacks.push(callback);
 };
 
+/**
+ * Trigger handlers for a named event.
+ */
+var socketTrigger = function (name, data) {
+
+	// Retry-enabled emissions have an emission ID in their responses.
+	var emissionId = (data || {}).EID;
+	if (emissionId) {
+
+		// The emission time is stored until a response is received.
+		var emissionTime = socketEmit['E' + emissionId];
+		if (emissionTime) {
+
+			// Cancel retries.
+			clearTimeout(socketEmit['T' + emissionId]);
+			delete socketEmit['E' + emissionId];
+
+			// TODO: Track latencies for adaptive retry and heartbeat delays.
+			var elapsed = new Date() - emissionTime;
+		}
+
+		// If the emission time is cleared, callbacks have already run.
+		else {
+			return;
+		}
+	}
+
+	// Run all of the handlers that have been bound to this name.	
+	var handlers = socket.H;
+	var callbacks = handlers[name] = handlers[name] || [];
+	forEach(callbacks, function (callback) {
+		callback(data);
+	});
+};
+
+/**
+ * Emit data over the socket, retrying if necessary
+ */
+var socketEmit = function (name, data, retries, onFailure) {
+
+	// If this is the first time sending, set everything up.	
+	if (retries === true) {
+		retries = SOCKET_EMIT_RETRY_COUNT;
+		// Clone the data so that the EID won't be copied.
+		data = JSON.parse(JSON.stringify(data));
+		data.EID = socketEmissionId++;
+		// Keep track of the emit time so we can track latency.
+		socketEmit['E' + data.EID] = new Date();
+	}
+
+	// Send the data.
+	socket.send('5:::' + JSON.stringify({
+		name: name,
+		args: [data]
+	}));
+
+	// Set up retry timeouts if necessary.
+	if (retries) {
+		socketEmit['T' + data.EID] = setTimeout(function () {
+			socketEmit(tag, data, retries - 1, onFailure);
+		}, SOCKET_EMIT_RETRY_TIMEOUT);
+	}
+
+	// If we're out of retries, fail.
+	else if (retries === 0) {
+		if (onFailure) {
+			onFailure();
+		}
+	}
+};
+
+
 // Set up a new connection.
 socketConnect();
-
-socketOn('refresh', function (changed) {
-	location.reload();
-});
