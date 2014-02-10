@@ -107,8 +107,8 @@ function delegate(element, tagAndClass, eventName, eventHandler, customData, mul
  * Bind an event handler for both the mouseenter and mouseleave events.
  */
 function delegateHover(element, tagAndClass, eventHandler, customData) {
-    delegate(element, tagAndClass, HOVER_OVER, eventHandler, true, customData);
-    delegate(element, tagAndClass, HOVER_OUT, eventHandler, false, customData);
+    delegate(element, tagAndClass, 'mouseover', eventHandler, true, customData);
+    delegate(element, tagAndClass, 'mouseout', eventHandler, false, customData);
 }
 
 /**
