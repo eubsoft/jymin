@@ -34,7 +34,7 @@ function getResponse(url, data, onSuccess, onFailure, evalJson) {
 		if (data) {
 			request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		}
-		request.send(data);
+		request.send(data || null);
 	}
 	return true;
 }

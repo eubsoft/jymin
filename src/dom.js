@@ -67,11 +67,13 @@ var getParent = function(element, tagName) {
  * Create a DOM element, and append it to a parent element.
  */
 var addElement = function(parentElement, tagIdentifier, beforeSibling) {
-    var tagAndClass = tagIdentifier.split('.');
+	var tagAndAttributes = tagIdentifier.split('?');
+	var tagAndClass = tagAndAttributes[0].split('.');
     var className = tagAndClass.slice(1).join(' ');
     var tagAndId = tagAndClass[0].split('#');
     var tagName = tagAndId[0] || 'div';
     var id = tagAndId[1];
+    var attributes = tagAndAttributes[1];
     var cachedElement = addElement[tagName] || (addElement[tagName] = document.createElement(tagName));
     var element = cachedElement.cloneNode(true);
 	if (id) {
@@ -82,6 +84,13 @@ var addElement = function(parentElement, tagIdentifier, beforeSibling) {
 	}
     if (parentElement) {
         insertChild(parentElement, element, beforeSibling);
+    }
+    if (attributes) {
+    	attributes = attributes.split('&');
+	    forEach(attributes, function (attribute) {
+	    	var keyAndValue = attribute.split('=');
+	    	element.setAttribute(keyAndValue[0], keyAndValue[1]);
+	    });
     }
     return element;
 };

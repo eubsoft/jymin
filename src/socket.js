@@ -19,9 +19,13 @@ var socketConnect = function () {
  * Set up a socket based on a setup string returned from the server.
  */
 var socketSetup = function (setupString) {
+	var WebSocket = window.WebSocket;
 	var setupData = setupString.split(':');
 	var socketId = setupData[0];
 	var oldSocket = socket;
+	if (!WebSocket) {
+		return;
+	}
 	socket = new WebSocket('ws://' + getHost() + SOCKET_IO_PATH + 'websocket/' + socketId);
 	socket.H = oldSocket.H;
 	delete oldSocket.H;
