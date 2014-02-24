@@ -1,34 +1,33 @@
 {
-	"name": "jymin",
-	"title": "Jymin",
-	"description": "Tiny JavaScript for a Big World",
-	"version": "0.0.3",
-	"main": "dist/jymin.js",
-	"homepage": "http://jymin.com",
-	"author": {
-		"name": "Jymin Contributors",
-		"url": "https://github.com/eubsoft/jymin/blob/master/AUTHORS.txt"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/eubsoft/jymin.git"
-	},
-	"keywords": [
-		"jymin",
-		"javascript",
-		"library",
-		"minify"
-	],
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "https://github.com/eubsoft/jymin/blob/master/MIT-LICENSE.txt"
-		}
-	],
-	"dependencies": {},
-	"devDependencies": {
-		"uglify-js": "2.4.12"
-	},
-	"readmeFilename": "README.md",
-	"homepage": "http://jymin.com"
+  "name": "jymin",
+  "title": "Jymin",
+  "description": "Tiny JavaScript for a Big World",
+  "version": "0.0.4",
+  "main": "dist/jymin.js",
+  "homepage": "http://jymin.com",
+  "author": {
+    "name": "Jymin Contributors",
+    "url": "https://github.com/eubsoft/jymin/blob/master/AUTHORS.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eubsoft/jymin.git"
+  },
+  "keywords": [
+    "jymin",
+    "javascript",
+    "library",
+    "minify"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/eubsoft/jymin/blob/master/MIT-LICENSE.txt"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "uglify-js": "2.4.12"
+  },
+  "readmeFilename": "README.md"
 }
